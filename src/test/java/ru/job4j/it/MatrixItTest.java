@@ -28,7 +28,8 @@ public class MatrixItTest {
 
     @Test
     public void whenFirstEmptyThenHashNext() {
-        int[][] in = { {}, {1} };
+        int[][] in = {
+                {}, {1} };
         MatrixIt it = new MatrixIt(in);
         assertThat(it.hasNext(), is(true));
     }
