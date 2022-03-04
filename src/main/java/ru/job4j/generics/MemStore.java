@@ -32,6 +32,6 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public T findById(String id) {
-        return storage.containsKey(id) ? storage.get(id): null;
+        return storage.containsKey(id) ? storage.get(id) : null;
     }
 }
