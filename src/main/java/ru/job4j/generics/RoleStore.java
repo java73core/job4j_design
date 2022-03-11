@@ -11,22 +11,14 @@ public class RoleStore implements Store<Role> {
 
     @Override
     public boolean replace(String id, Role model) {
-        boolean  rsl = false;
-        if (store.findById(id) != null) {
-            store.replace(id, model);
-            rsl = true;
-        }
-        return rsl;
+        store.replace(id, model);
+        return true;
     }
 
     @Override
     public boolean delete(String id) {
-        boolean  rsl = false;
-        if (store.findById(id) != null) {
-            store.delete(id);
-            rsl = true;
-        }
-        return rsl;
+        store.delete(id);
+        return true;
     }
 
     @Override
