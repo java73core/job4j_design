@@ -16,7 +16,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     private void arrayDoubleLength() {
         if (container.length == size) {
-            container = Arrays.copyOf(container, container.length + 2);
+            container = Arrays.copyOf(container, (container.length + 1) * 2);
         }
     }
 
