@@ -28,16 +28,26 @@ public class SimpleLinkedList<E> implements ListL<E> {
     @Override
     public E get(int index) {
         Objects.checkIndex(index, size);
-        if (!(index >= 0 && index < size)) {
-            throw new  IndexOutOfBoundsException();
+        E result;
+        if (index < (size >> 1)) {
+            Node<E> x = first;
+            for (int i = 0; i < index; i++) {
+                x = x.next;
+            }
+            result = x.item;
+        } else {
+            Node<E> x = last;
+            for (int i = size - 1; i > index; i--) {
+                x = x.prev;
+            }
+            result = x.item;
         }
-        return getNode(index).item;
+        return result;
     }
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            int cursor = 0;
             final int expectedModCount = modCount;
             Node<E> element = first;
             @Override
@@ -45,7 +55,7 @@ public class SimpleLinkedList<E> implements ListL<E> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return cursor < size;
+                return element != null;
             }
 
             @Override
@@ -55,25 +65,8 @@ public class SimpleLinkedList<E> implements ListL<E> {
                 }
                 E data = element.item;
                 element = element.next;
-                cursor++;
                 return data;
             }
         };
-    }
-
-    private Node<E> getNode(int index) {
-        if (index < (size >> 1)) {
-            Node<E> x = first;
-            for (int i = 0; i < index; i++) {
-                x = x.next;
-            }
-                return x;
-        } else {
-            Node<E> x = last;
-            for (int i = size - 1; i > index; i--) {
-               x = x.prev;
-            }
-            return x;
-        }
     }
 }
