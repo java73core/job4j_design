@@ -6,7 +6,6 @@ public class SimpleLinkedList<E> implements ListL<E> {
     private Node<E> node;
 
     private int size;
-
     private int modCount;
     private Node<E> last;
     private Node<E> first;
