@@ -13,7 +13,7 @@ public class SimpleQueue<T> {
      * @return удалённый элемент
      */
     public T poll() {
-        if (in == null) {
+        if (sizeIn == 0) {
             throw new NoSuchElementException();
         }
             if (sizeOut == 0) {
