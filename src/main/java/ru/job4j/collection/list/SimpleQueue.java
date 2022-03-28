@@ -11,21 +11,19 @@ public class SimpleQueue<T> {
      * @return удалённый элемент
      */
     public T poll() {
-        while (size1 > 0) {
-            out.push(in.pop());
-            size1--; size2++;
-        }
-        T t = out.pop(); size2--;
-        while (size2 > 0) {
-            in.push(out.pop());
-            size1++; size2--;
-        }
-        return t;
+            if (size2 == 0) {
+                while (size1 > 0) {
+                    out.push(in.pop());
+                    size1--; size2++;
+                }
+            }
+            size2--;
+            return out.pop();
     }
 
     /**
      * Метод добавления элемента в стек
-     * @param value - добавляемый элемент
+     * @param value
      */
     public void push(T value) {
         in.push(value);
