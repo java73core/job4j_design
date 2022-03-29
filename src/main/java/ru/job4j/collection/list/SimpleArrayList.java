@@ -14,6 +14,10 @@ public class SimpleArrayList<T> implements List<T> {
         this.container = (T[]) new Object[capacity];
     }
 
+    public SimpleArrayList() {
+        this.container = (T[]) new Object[0];
+    }
+
     private void arrayDoubleLength() {
         if (container.length == size) {
             container = Arrays.copyOf(container, (container.length + 1) * 2);
