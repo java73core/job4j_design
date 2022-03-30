@@ -28,9 +28,9 @@ public class ListUtilsTest {
 
     @Test
     public void whenAddAfterLast() {
-        List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2));
+        List<Integer> input = new ArrayList<>(Arrays.asList(0, 1, 2, 4));
         ListUtils.addAfter(input, 2, 3);
-        assertThat(input, is(Arrays.asList(0, 1, 2, 3)));
+        assertThat(input, is(Arrays.asList(0, 1, 2, 3, 4)));
     }
 
     @Test
