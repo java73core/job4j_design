@@ -19,7 +19,7 @@ public class LogFilter {
 
     public static void save(List<String> log, String file) {
         try (FileOutputStream out = new FileOutputStream(file)) {
-            for(String str : log) {
+            for (String str : log) {
                 out.write(str.getBytes());
                 out.write(System.lineSeparator().getBytes());
             }
