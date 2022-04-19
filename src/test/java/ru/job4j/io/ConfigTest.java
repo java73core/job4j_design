@@ -39,4 +39,13 @@ public class ConfigTest {
         assertThat(config.value("hibernate.connection.url"),
                 is(Matchers.nullValue()));
     }
+
+    @Test
+    public void whenTwoEqualsConfigFile() {
+        String path = "./data/twoequals.properties";
+        Config config = new Config(path);
+        config.load();
+        assertThat(config.value("user"),
+                is("userName=Petr"));
+    }
 }

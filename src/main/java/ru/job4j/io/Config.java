@@ -17,11 +17,13 @@ public class Config {
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
-                    .filter(s -> (!s.isEmpty()) && !(s.substring(0, 1).contains("#")))
+                    .filter(s -> (!s.isEmpty()) && !s.startsWith("#"))
                     .map(s -> s.split("="))
                     .filter(s -> {
-                        if (s.length != 2) {
-                            throw new IllegalArgumentException();
+                        if (s.length > 2) {
+                            s[1] += "=" + s[2];
+                        } else if (s.length < 2) {
+                            throw new IllegalArgumentException("Недопустимый аргумент");
                         }
                         return true;
                     })
