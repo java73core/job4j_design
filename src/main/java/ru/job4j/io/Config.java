@@ -18,11 +18,9 @@ public class Config {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
             read.lines()
                     .filter(s -> (!s.isEmpty()) && !s.startsWith("#"))
-                    .map(s -> s.split("="))
+                    .map(s -> s.split("=", 2))
                     .filter(s -> {
-                        if (s.length > 2) {
-                            s[1] += "=" + s[2];
-                        } else if (s.length < 2) {
+                        if (s.length != 2 || s[1].equals("")) {
                             throw new IllegalArgumentException("Недопустимый аргумент");
                         }
                         return true;
