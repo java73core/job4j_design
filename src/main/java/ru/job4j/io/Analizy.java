@@ -9,11 +9,10 @@ public class Analizy {
         boolean flag = true;
         String time = null;
         List<String> list = new ArrayList<>();
-
             try (BufferedReader read = new BufferedReader(new FileReader(source));
                  PrintWriter write = new PrintWriter(new FileOutputStream(target))) {
                 String line;
-                while ((line = read.readLine())!= null) {
+                while ((line = read.readLine()) != null) {
                     String[] log = line.split(" ");
                     if (log[0].equals("200") || log[0].equals("300")) {
                         if (!flag) {
