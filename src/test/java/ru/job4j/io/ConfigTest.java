@@ -48,4 +48,11 @@ public class ConfigTest {
         assertThat(config.value("user"),
                 is("userName=Petr"));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenWithoutEqualsConfigFile() {
+        String path = "./data/withoutequals.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }
