@@ -6,4 +6,4 @@ Aim  job4trucker write programm, which will can example really job program.
 
 Contacts:
 Andrey Mironov
-89061414206
+//t.me/Andrew_Mironov73
