@@ -15,7 +15,7 @@ public class Analizy {
                  read.lines().forEach(tmpList::add);
                  for (String str: tmpList) {
                     String[] log = str.split(" ");
-                    if (log[0].equals("200") || log[0].equals("300")) {
+                    if ("200".equals(log[0]) || "300".equals(log[0])) {
                         if (!flag) {
                             flag = true;
                             list.add(time + ";" + log[1]);
