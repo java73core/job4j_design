@@ -1,11 +1,10 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Analizy {
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         AtomicBoolean flag = new AtomicBoolean(true);
         var ref = new Object() {
             String time = "";
@@ -35,6 +34,6 @@ public class Analizy {
 
     public static void main(String[] args) {
             Analizy analizy = new Analizy();
-            analizy.unavailable("unavailable.csv", "result.txt");
+            unavailable("unavailable.csv", "result.txt");
     }
 }
