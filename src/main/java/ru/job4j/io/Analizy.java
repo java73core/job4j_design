@@ -1,33 +1,21 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Analizy {
     public void unavailable(String source, String target) {
-        boolean flag = true;
-        String time = null;
-        List<String> list = new ArrayList<>();
-        List<String> tmpList = new ArrayList<>();
+        AtomicBoolean flag = new AtomicBoolean(false);
             try (BufferedReader read = new BufferedReader(new FileReader(source));
                  PrintWriter write = new PrintWriter(new FileOutputStream(target))) {
-                 read.lines().forEach(tmpList::add);
-                 for (String str: tmpList) {
-                    String[] log = str.split(" ");
-                    if ("200".equals(log[0]) || "300".equals(log[0])) {
-                        if (!flag) {
-                            flag = true;
-                            list.add(time + ";" + log[1]);
-                        }
-                    } else {
-                        if (flag) {
-                            flag = false;
-                            time = log[1];
-                        }
-                    }
-                }
-                    write.print(list);
+
+read.lines().filter(s -> (!s.isEmpty()))
+            .map(s -> s.split(" ", 2))
+            .filter(s -> "400".equals(s[0]) || "500".equals(s[0]) || flag.get())
+            .forEach(s -> {
+                write.print(s[1] + "; ");
+                flag.set(true);
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }
