@@ -17,7 +17,6 @@ public class AnalizyTest {
     public void unavailableFirst() throws IOException {
         File source = folder.newFile("unavailable.csv");
         File target = folder.newFile("result.txt");
-
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("200 10:56:01");
             out.println("500 10:57:01");

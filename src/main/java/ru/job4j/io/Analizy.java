@@ -11,7 +11,6 @@ public class Analizy {
         };
             try (BufferedReader read = new BufferedReader(new FileReader(source));
                  PrintWriter write = new PrintWriter(new FileOutputStream(target))) {
-
             read.lines().filter(s -> (!s.isEmpty()))
                         .map(s -> s.split(" ", 2))
                         .forEach(s -> {
