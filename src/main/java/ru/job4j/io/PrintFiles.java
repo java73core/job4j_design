@@ -13,18 +13,15 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 
 public class PrintFiles implements FileVisitor<Path> {
 
-    private Predicate<Path> condition;
-    private Path path;
+    private final Predicate<Path> condition;
+
+    private final List<Path> list = new ArrayList<>();
 
     public PrintFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
 
     public List<Path> getPaths() {
-        List<Path> list = new ArrayList<>();
-        if (condition.test(path)) {
-           list.add(path.toAbsolutePath());
-        }
         return list;
     }
 
@@ -35,7 +32,9 @@ public class PrintFiles implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        path = file.toAbsolutePath();
+        if (condition.test(file)) {
+            list.add(file);
+        }
         return CONTINUE;
     }
 
