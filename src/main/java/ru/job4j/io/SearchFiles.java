@@ -11,13 +11,13 @@ import java.util.function.Predicate;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
-public class PrintFiles implements FileVisitor<Path> {
+public class SearchFiles implements FileVisitor<Path> {
 
     private final Predicate<Path> condition;
 
     private final List<Path> list = new ArrayList<>();
 
-    public PrintFiles(Predicate<Path> condition) {
+    public SearchFiles(Predicate<Path> condition) {
         this.condition = condition;
     }
 
