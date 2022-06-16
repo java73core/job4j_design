@@ -10,6 +10,5 @@ public class DuplicatesFinder {
         Files.walkFileTree(Path.of("C:\\test"), new DuplicatesVisitor());
         DuplicatesVisitor duplicatesVisitor = new DuplicatesVisitor();
         duplicatesVisitor.getDoubleFile().values().stream().filter(x -> x.size() > 1).forEach(System.out::println);
-
     }
 }
