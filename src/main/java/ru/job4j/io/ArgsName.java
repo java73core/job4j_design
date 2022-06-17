@@ -48,6 +48,9 @@ public class ArgsName {
         if (!str.contains("=")) {
             throw new IllegalArgumentException("неправильный формат аргумента!");
         }
+        if (!str.contains("-")) {
+            throw new IllegalArgumentException("Строка должна начинаться с символа \'-\' ");
+        }
     }
 
     public static void main(String[] args) {

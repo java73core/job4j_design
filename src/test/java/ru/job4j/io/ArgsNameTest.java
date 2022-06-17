@@ -51,7 +51,7 @@ public class ArgsNameTest {
         ArgsName jvm = ArgsName.of(new String[] {"-enconding:UTF-8"});
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whenWithoutDash() {
         ArgsName jvm = ArgsName.of(new String[] {"encoding=UTF-8", "Xmx=512"});
         assertThat(jvm.get("Xmx"), is("512"));
