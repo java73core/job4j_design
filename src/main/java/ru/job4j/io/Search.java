@@ -29,10 +29,10 @@ public class Search {
             throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
         }
         if (!Objects.equals(args[0], ".")) {
-            throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска!");
+            throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
         }
         if (!Objects.equals(args[1], ".class")) {
-            throw new IllegalArgumentException("Отсутствуют аргументы: Расширение файла!");
+            throw new IllegalArgumentException("Отсутствуют аргументы: Расширение файла! ");
         }
     }
 }
