@@ -22,16 +22,13 @@ public class Search {
     }
 
     public static void valid(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Нет аргументов!");
-        }
         if (args.length != 2) {
             throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
         }
-        if (!Objects.equals(args[0], ".")) {
+        if (Objects.equals(args[0], "")) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
         }
-        if (!Objects.equals(args[1], ".class")) {
+        if (Objects.equals(args[1], "")) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Расширение файла! ");
         }
     }
