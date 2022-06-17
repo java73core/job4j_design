@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Search {
@@ -22,7 +23,13 @@ public class Search {
 
     public static void valid(String[] args) {
         if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+            throw new IllegalArgumentException("Нет аргументов!");
+        }
+        if (args.length > 2 || args.length == 1) {
+            throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
+        }
+        if (!Objects.equals(args[0], ".") || !Objects.equals(args[1], ".class")) {
+            throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска или расширение файла.");
         }
     }
 }
