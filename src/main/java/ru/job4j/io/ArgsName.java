@@ -17,32 +17,36 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        valid(args);
         for (String s : args) {
-            if (!s.contains("=")) {
-                throw new IllegalArgumentException("неправильный формат аргумента!");
-            }
+            validString(s);
             String[] str = s.split("=", 2);
             str[0] = str[0].replace("-", "");
-                    if (Objects.equals(str[1], "")) {
-                            throw new IllegalArgumentException("нет такого значения!");
-                    }
-                    if (Objects.equals(str[0], "")) {
-                        throw new IllegalArgumentException("нет такого ключа!");
-                    }
+            valid(str);
             values.put(str[0], str[1]);
         }
     }
 
     public static ArgsName of(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("Нет аргументов!");
+        }
         ArgsName names = new ArgsName();
         names.parse(args);
         return names;
     }
 
-    public static void valid(String[] args) {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Нет аргументов!");
+    public static void valid(String[] arg) {
+        if (Objects.equals(arg[1], "")) {
+            throw new IllegalArgumentException("нет такого значения!");
+        }
+        if (Objects.equals(arg[0], "")) {
+            throw new IllegalArgumentException("нет такого ключа!");
+        }
+    }
+
+    public  static void validString(String str) {
+        if (!str.contains("=")) {
+            throw new IllegalArgumentException("неправильный формат аргумента!");
         }
     }
 
