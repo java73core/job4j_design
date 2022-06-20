@@ -26,7 +26,7 @@ public class Search {
         if (args.length != 2) {
             throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
         }
-        if (!Files.exists(Paths.get(args[0]))) {
+        if (!Files.exists(Paths.get(args[0]).toAbsolutePath())) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
         }
         if (!args[1].contains(".")) {
