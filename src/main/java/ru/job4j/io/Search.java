@@ -1,11 +1,11 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Predicate;
 
 public class Search {
@@ -29,7 +29,7 @@ public class Search {
         if (!Files.exists(Paths.get(args[0]))) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
         }
-        if (!Files.exists(Paths.get(args[0]).getFileName())) {
+        if (!new File(args[0]).isDirectory()) {
             throw new IllegalArgumentException("Отсутствует каталог! ");
         }
         if (!args[1].contains(".")) {
