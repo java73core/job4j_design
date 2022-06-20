@@ -10,25 +10,26 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        valid(args);
+        Search search = new Search();
+        search.valid(args);
         Path start = Paths.get(args[0]);
-        search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
+        search.search(start, p -> p.toFile().getName().endsWith(args[1])).forEach(System.out::println);
     }
 
-    public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
+    public List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
 
-    public static void valid(String[] args) {
+    public void valid(String[] args) {
         if (args.length != 2) {
             throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
         }
-        if (Objects.equals(args[0], "")) {
+        if (!Files.exists(Paths.get(args[0]))) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
         }
-        if (Objects.equals(args[1], "")) {
+        if (!args[1].contains(".")) {
             throw new IllegalArgumentException("Отсутствуют аргументы: Расширение файла! ");
         }
     }
