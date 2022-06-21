@@ -1,6 +1,5 @@
 package ru.job4j.io;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,7 +15,7 @@ public class ArgsName {
         return values.get(key);
     }
 
-    private void parse(String[] args) {
+    public void parse(String[] args) {
         for (String s : args) {
             validString(s);
             String[] str = s.split("=", 2);
@@ -44,7 +43,7 @@ public class ArgsName {
         }
     }
 
-    public  static void validString(String str) {
+    public static void validString(String str) {
         if (!str.contains("=")) {
             throw new IllegalArgumentException("неправильный формат аргумента!");
         }

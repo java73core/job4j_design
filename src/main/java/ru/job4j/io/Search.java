@@ -23,7 +23,7 @@ public class Search {
     }
 
     public void valid(String[] args) {
-        if (args.length != 2) {
+        if (args.length != 3) {
             throw new IllegalArgumentException("Количество аргументов не соответствует требованиям задачи!");
         }
         if (!Files.exists(Paths.get(args[0]))) {
