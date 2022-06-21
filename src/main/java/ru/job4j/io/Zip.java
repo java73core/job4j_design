@@ -11,16 +11,18 @@ public class Zip {
     private static ArgsName names = new ArgsName();
 
     public void packFiles(List<Path> sources, Path target) {
-        for (Path path : sources) {
-            try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target.toFile())))) {
+        try (ZipOutputStream zip = new ZipOutputStream(new BufferedOutputStream(new FileOutputStream(target.toFile())))) {
+              for (Path path : sources) {
                 zip.putNextEntry(new ZipEntry(path.toAbsolutePath().toString()));
                 try (BufferedInputStream out = new BufferedInputStream(new FileInputStream(path.toFile()))) {
                     zip.write(out.readAllBytes());
-                }
-            } catch (Exception e) {
+                } catch (Exception e) {
                 e.printStackTrace();
+                }
+              }
+        } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        }
     }
 
     public void packSingleFile(File source, File target) {
