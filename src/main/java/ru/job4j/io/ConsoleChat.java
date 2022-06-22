@@ -40,7 +40,7 @@ public class ConsoleChat {
             if (Objects.equals(input, CONTINUE) && !flagStop) {
                 flagStop = true;
             }
-           if(flagStop || flagWhile) {
+           if (flagStop || flagWhile) {
                logs.add(input + ls);
            }
             if (flagStop) {
