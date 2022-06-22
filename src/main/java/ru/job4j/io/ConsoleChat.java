@@ -20,32 +20,33 @@ public class ConsoleChat {
 
     public void run() {
         List<String> logs = new ArrayList<>();
-        Boolean flagWhile = true;
-        Boolean flagStop = true;
-        String input;
+        boolean flagWhile = true;
+        boolean flagStop = true;
         Scanner scan = new Scanner(System.in);
         String s = "Привет! О чём поговорим?";
         System.out.println(s);
-        logs.add(s + System.lineSeparator());
+        var ls = System.lineSeparator();
+        logs.add(s + ls);
         while (flagWhile) {
-            input = scan.nextLine();
-            logs.add(input + System.lineSeparator());
+            String input = scan.nextLine();
+            logs.add(input + ls);
             if (input.equals(OUT)) {
-                logs.add(OUT + System.lineSeparator() +  "Dialog is over!");
-                flagWhile = false; break;
+                logs.add(OUT + ls +  "Dialog is over!");
+                flagWhile = false;
+                flagStop = false;
             }
             if (Objects.equals(input, STOP) && flagStop) {
                 flagStop = false;
-                logs.add(STOP + System.lineSeparator());
+                logs.add(STOP + ls);
             }
             if (Objects.equals(input, CONTINUE) && !flagStop) {
                 flagStop = true;
-                logs.add(CONTINUE + System.lineSeparator());
+                logs.add(CONTINUE + ls);
             }
             if (flagStop) {
-                String answer3 = generationBotAnswers();
-                System.out.println(answer3);
-                logs.add(answer3 + System.lineSeparator() + input);
+                String answer = generationBotAnswers();
+                System.out.println(answer);
+                logs.add(answer + ls + input);
             }
         }
         saveLog(logs);
