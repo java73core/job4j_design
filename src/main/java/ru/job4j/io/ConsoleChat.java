@@ -29,24 +29,24 @@ public class ConsoleChat {
         logs.add(s + ls);
         while (flagWhile) {
             String input = scan.nextLine();
-            logs.add(input + ls);
             if (input.equals(OUT)) {
-                logs.add(OUT + ls +  "Dialog is over!");
+                logs.add(input + ls + "Dialog is over!");
                 flagWhile = false;
                 flagStop = false;
             }
             if (Objects.equals(input, STOP) && flagStop) {
                 flagStop = false;
-                logs.add(STOP + ls);
             }
             if (Objects.equals(input, CONTINUE) && !flagStop) {
                 flagStop = true;
-                logs.add(CONTINUE + ls);
             }
+           if(flagStop || flagWhile) {
+               logs.add(input + ls);
+           }
             if (flagStop) {
                 String answer = generationBotAnswers();
                 System.out.println(answer);
-                logs.add(answer + ls + input);
+                logs.add(answer + ls);
             }
         }
         saveLog(logs);
