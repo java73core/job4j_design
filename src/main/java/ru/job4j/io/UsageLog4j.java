@@ -21,5 +21,6 @@ public class UsageLog4j {
         LOG.debug("Char: {}, double : {}", ch, price);
         LOG.debug("short: {}, byte : {}", sh, radius);
         LOG.debug("long: {}, boolean : {}", l, flag);
+        LOG.debug("float: {}, boolean : {}", voice, flag);
     }
 }
