@@ -8,10 +8,18 @@ public class UsageLog4j {
 
     public static void main(String[] args) {
         BasicConfigurator.configure();
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        String name = "Petr Arsentev";
+        int age = 33;
+        double price = 10.0;
+        float voice = 22.0f;
+        byte radius = 22;
+        boolean flag = true;
+        long l = 323232;
+        short sh = 343;
+        char ch = 'c';
+        LOG.debug("User info name : {}, age : {}", name, age);
+        LOG.debug("Char: {}, double : {}", ch, price);
+        LOG.debug("short: {}, byte : {}", sh, radius);
+        LOG.debug("long: {}, boolean : {}", l, flag);
     }
 }
