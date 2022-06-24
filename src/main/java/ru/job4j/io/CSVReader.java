@@ -88,6 +88,9 @@ public class CSVReader {
     }
 
     public static void main(String[] args) {
-
+        ArgsName argsName = ArgsName.of(new String[]{
+                "-path=c://test//source.csv", "-delimiter=;", "-out=c://test//target.csv", "-filter=name,age"
+        });
+        CSVReader.handle(argsName);
     }
 }
