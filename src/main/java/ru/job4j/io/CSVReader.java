@@ -87,10 +87,23 @@ public class CSVReader {
         }
     }
 
+    public static String[] input() {
+        Scanner scanner = new Scanner(System.in);
+        String[] array = new String[4];
+        System.out.println("Введите аргументы запуска программы!");
+        System.out.println("Введите аргумент -path: ");
+        array[0] = "-path=" + scanner.nextLine();
+        System.out.println("Введите аргумент -delimiter: ");
+        array[1] = "-delimiter=" + scanner.nextLine();
+        System.out.println("Введите аргумент -out: ");
+        array[2] = "-out=" + scanner.nextLine();
+        System.out.println("Введите аргумент -filter: ");
+        array[3] = "-filter=" + scanner.nextLine();
+        return array;
+    }
+
     public static void main(String[] args) {
-        ArgsName argsName = ArgsName.of(new String[]{
-                "-path=c://test//source.csv", "-delimiter=;", "-out=c://test//target.csv", "-filter=name,age"
-        });
+        ArgsName argsName =  ArgsName.of(input());
         CSVReader.handle(argsName);
     }
 }
