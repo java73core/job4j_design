@@ -53,14 +53,20 @@ public class CSVReader {
     }
 
     public void valid(ArgsName args) {
-        if (args.size() == 0) {
-            throw new IllegalArgumentException("Нет аргументов!");
+        if (args.size() != 4) {
+            throw new IllegalArgumentException("количество аргументов не соответствует требования задачи!");
         }
         if (!Files.exists(Paths.get(args.get("path")))) {
-            throw new IllegalArgumentException("Отсутствуют аргументы: Каталог поиска! ");
+            throw new IllegalArgumentException("Отсутствуют аргументы: Исходный файл! ");
+        }
+        if (!args.get("path").endsWith(".csv")) {
+            throw new IllegalArgumentException("Неверное расширение файла! ");
         }
         if (!Files.exists(Paths.get(args.get("out")))) {
-            throw new IllegalArgumentException("Отсутствуют аргументы: каталог записи в файл! ");
+            if (!args.get("out").equals("stdout")) {
+                throw new IllegalArgumentException("Отсутствуют аргументы: аргумент вывода в консоль! ");
+            }
+            throw new IllegalArgumentException("Отсутствуют аргументы: файл для записи! ");
         }
     }
 
@@ -79,5 +85,9 @@ public class CSVReader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
