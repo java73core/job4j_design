@@ -20,6 +20,22 @@ public class Animal {
     public Animal() {
     }
 
+    public boolean isPredator() {
+        return predator;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String[] getVoice() {
+        return voice;
+    }
+
     public Animal(boolean predator, int age, String name, String[] voice) {
         this.predator = predator;
         this.age = age;
