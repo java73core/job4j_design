@@ -1,6 +1,6 @@
 <?xml version="1.1" encoding="UTF-8" ?>
 <animals predator="true" age="5">
-    <name="tiger"/>
+    <name name="tiger"/>
     <voices>
         <status>p-p-p-p</status>
         <status>mp-p-p-p</status>
