@@ -14,7 +14,7 @@ insert into fauna(name, avg_age, discovery_date) VALUES ('leon', 5, '1150-02-09'
 insert into fauna(name, avg_age, discovery_date) VALUES ('turtle', 20, '100-01-08');
 insert into fauna(name, avg_age, discovery_date) VALUES ('elephant', 10, '1200-06-01');
 
-select * from fauna where name = 'fish';
+select * from fauna where name like '%fish%';
 select * from fauna where avg_age between 10000 and 21000;
 select * from fauna where  discovery_date is null;
 select * from fauna where (SELECT EXTRACT(YEAR FROM discovery_date)) < '1950';
