@@ -10,6 +10,6 @@ create table author(
 
 create table book_author(
       id serial primary key,
-      book_id int references author(id) unique,
-      author_id int references book(id) unique
+      book_id int references author(id),
+      author_id int references book(id)
 );
