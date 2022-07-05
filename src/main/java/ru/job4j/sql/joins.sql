@@ -12,8 +12,7 @@ create table departments (
 create table employees (
     id serial primary key,
     name varchar(255),
-    departments_id int  references departments(id),
-    teens_id int references teens(id)
+    departments_id int  references departments(id)
 );
 
 insert into  departments(name) values('OOO FirstCompany');
@@ -25,16 +24,16 @@ insert into  departments(name) values('OOO Company');
 insert into teens(name, gender) VALUES ('Women', 'W');
 insert into teens(name, gender) VALUES ('Men', 'M');
 
-insert into employees(name, teens_id, departments_id) values ('Kate', 1, 1);
-insert into employees(name, teens_id, departments_id) values ('igor', 2, 2);
-insert into employees(name, teens_id, departments_id) values ('Olga', 1, 2);
-insert into employees(name, teens_id, departments_id) values ('lion', 2, 1);
-insert into employees(name, teens_id, departments_id) values ('Petr', 2, 2);
-insert into employees(name, teens_id, departments_id) values ('Lena', 1, 1);
-insert into employees(name, teens_id, departments_id) values ('Fedot', 2, 2);
-insert into employees(name, teens_id, departments_id) values ('Alex', 2, 1);
-insert into employees(name, teens_id, departments_id) values ('Anton', 2, 2);
-insert into employees(name, teens_id, departments_id) values ('Anna', 1, 1);
+insert into employees(name, departments_id) values ('Kate', 1);
+insert into employees(name, departments_id) values ('igor', 2);
+insert into employees(name, departments_id) values ('Olga', 2);
+insert into employees(name, departments_id) values ('lion', 1);
+insert into employees(name, departments_id) values ('Petr', 2);
+insert into employees(name, departments_id) values ('Lena', 1);
+insert into employees(name, departments_id) values ('Fedot', 2);
+insert into employees(name, departments_id) values ('Alex', 1);
+insert into employees(name, departments_id) values ('Anton', 2);
+insert into employees(name, departments_id) values ('Anna', 1);
 
 
 
@@ -48,17 +47,14 @@ select * from employees e cross join  departments d;
 
 select  d.name Контора, e.name Имя_работника from departments d
    left join employees e on d.id = e.departments_id
-group by e.name, d.name
-having e.name is null;
+where e.departments_id is null;
 
 select  d.name Контора, e.name Имя_работника from departments d
-        left join employees e on d.id = e.departments_id
-group by e.name, d.name;
+        left join employees e on d.id = e.departments_id;
+
 
 select  d.name Контора, e.name Имя_работника from employees e
-         right join departments d on d.id = e.departments_id
-group by e.name, d.name;
+         right join departments d on d.id = e.departments_id;
 
 select t1.name, t2.name from teens t1 cross join teens t2
-group by t1.name, t2.name
-having t1.name != t2.name;
+where t1.name != t2.name;
