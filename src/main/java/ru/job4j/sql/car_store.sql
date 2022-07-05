@@ -62,11 +62,11 @@ insert into car(name, body_id, engine_id, transmission_id) VALUES ('Лада П�
 insert into car(name, body_id, engine_id, transmission_id) VALUES ('Лада Приора', 4, 2, 1);
 insert into car(name, body_id, engine_id, transmission_id) VALUES ('Ниссан икстреил', 7, 3, 1);
 
-select * from car;
+
 select c.id, c.name car_name, cb.name body_name, ce.name engine_name, ct.name transmission_name from car c
-    right join car_bodies cb on cb.id = c.body_id
+    left join car_bodies cb on cb.id = c.body_id
     left join car_engines ce on ce.id = c.engine_id
-    join car_transmissions ct on ct.id = c.transmission_id;
+    left join car_transmissions ct on ct.id = c.transmission_id;
 
 select cb.name body_name from car c
        right join car_bodies cb on cb.id = c.body_id
