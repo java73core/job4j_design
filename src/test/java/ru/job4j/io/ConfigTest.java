@@ -21,7 +21,7 @@ public class ConfigTest {
         Config config = new Config(path);
         config.load();
         assertThat(config.value("hibernate.connection.url"),
-                is("jdbc:postgresql://127.0.0.1:5432/trackstudio"));
+                is("jdbc:postgresql://127.0.0.1:5432/idea_db"));
     }
 
     @Test (expected = IllegalArgumentException.class)
