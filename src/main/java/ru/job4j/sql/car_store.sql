@@ -64,18 +64,18 @@ insert into car(name, body_id, engine_id, transmission_id) VALUES ('Ниссан
 
 select * from car;
 select c.id, c.name car_name, cb.name body_name, ce.name engine_name, ct.name transmission_name from car c
-    full join car_bodies cb on cb.id = c.body_id
-    full join car_engines ce on ce.id = c.engine_id
+    right join car_bodies cb on cb.id = c.body_id
+    left join car_engines ce on ce.id = c.engine_id
     join car_transmissions ct on ct.id = c.transmission_id;
 
 select cb.name body_name from car c
-      full join car_bodies cb on cb.id = c.body_id
+       right join car_bodies cb on cb.id = c.body_id
 where c.name is null;
 
 select ce.name body_name from car c
-       full join car_engines ce on ce.id = c.engine_id
+       right join car_engines ce on ce.id = c.engine_id
 where c.name is null;
 
 select ct.name body_name from car c
-       full join car_transmissions ct on ct.id = c.transmission_id
+       right join car_transmissions ct on ct.id = c.transmission_id
 where c.name is null;
