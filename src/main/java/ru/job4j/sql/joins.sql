@@ -59,4 +59,6 @@ select  d.name Контора, e.name Имя_работника from employees e
          right join departments d on d.id = e.departments_id
 group by e.name, d.name;
 
-select e.name, t.name from employees e cross join teens t;
+select t1.name, t2.name from teens t1 cross join teens t2
+group by t1.name, t2.name
+having t1.name != t2.name;
