@@ -23,7 +23,13 @@ public class ImportDB {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
            rd.lines().map(s -> s.split(";"))
-                   .forEach(s -> users.add(new User(s[0], s[1])));
+                   .forEach(s -> {
+                       if (s.length == 2) {
+                       users.add(new User(s[0], s[1]));
+                   } else {
+                           throw new IllegalArgumentException("Некорректное количество аргументов. Должно быть два аргумента.");
+                       }
+                   });
         }
         return users;
     }
