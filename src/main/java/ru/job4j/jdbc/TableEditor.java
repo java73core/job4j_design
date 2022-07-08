@@ -9,13 +9,18 @@ public class TableEditor implements AutoCloseable {
 
     private Connection connection;
 
-    private Properties properties;
+    private final Properties properties;
+
+    public TableEditor(Properties properties) throws Exception {
+        this.properties = properties;
+        initConnection();
+    }
+
+    private void initConnection() throws Exception {
+        connection = getConnection();
+    }
 
     public Connection getConnection() throws Exception {
-       Properties properties = new Properties();
-            try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
-                properties.load(in);
-            }
         Class.forName(properties.getProperty("hibernate.connection.driver_class"));
         String url = properties.getProperty("hibernate.connection.url");
         String login = properties.getProperty("hibernate.connection.username");
@@ -49,14 +54,12 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void executer(String sql, String tableName, boolean flag) throws Exception {
-        try (Connection connection = getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 statement.execute(sql);
                 if (flag) {
                     System.out.println(getTableScheme(connection, tableName));
                 }
             }
-        }
     }
 
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
@@ -80,12 +83,17 @@ public class TableEditor implements AutoCloseable {
 
     public static void main(String[] args) throws Exception {
         String tableName = "simple_table";
-        TableEditor tableEditor = new TableEditor();
-        tableEditor.createTable(tableName);
-        tableEditor.addColumn(tableName, "Column1", "serial");
-        tableEditor.renameColumn(tableName, "Column1", "newColumn");
-        tableEditor.dropColumn(tableName, "newColumn");
-        tableEditor.dropTable(tableName);
+        Properties properties = new Properties();
+        try (InputStream in = TableEditor.class.getClassLoader().getResourceAsStream("app.properties")) {
+            properties.load(in);
+        }
+        try (TableEditor tableEditor = new TableEditor(properties)) {
+            tableEditor.createTable(tableName);
+            tableEditor.addColumn(tableName, "Column1", "serial");
+            tableEditor.renameColumn(tableName, "Column1", "newColumn");
+            tableEditor.dropColumn(tableName, "newColumn");
+            tableEditor.dropTable(tableName);
+        }
     }
 
     @Override
