@@ -22,13 +22,13 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-           rd.lines().map(s -> s.split(";"))
+           rd.lines()
                    .forEach(s -> {
-                       if (s.length == 2) {
-                       users.add(new User(s[0], s[1]));
-                   } else {
+                     String[] array =  s.split(";");
+                       if (array.length != 2 || (array[0].isBlank() || array[1].isBlank())) {
                            throw new IllegalArgumentException("Некорректное количество аргументов. Должно быть два аргумента.");
-                       }
+                   }
+                           users.add(new User(array[0], array[1]));
                    });
         }
         return users;
