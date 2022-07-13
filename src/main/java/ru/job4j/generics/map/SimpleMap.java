@@ -1,6 +1,5 @@
 package ru.job4j.generics.map;
 
-import ru.job4j.collection.list.Node;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -39,11 +38,11 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     }
 
     private int indexFor(int hash) {
-        return hash & (capacity - 1);
+        return hash(hash) % (capacity - 1);
     }
 
     private void expand() {
-        int newSize = table.length * 2;
+        int newSize = capacity * 2;
         MapEntry<K, V>[] newMapEntry = new MapEntry[newSize];
         for (MapEntry<K, V> node : table) {
             if (node != null) {
@@ -80,11 +79,13 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     @Override
     public Iterator<K> iterator() {
         return new Iterator() {
-
             private int exceptedModCount = modCount;
             private int index = 0;
             @Override
             public boolean hasNext() {
+                if (exceptedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
                 for (int i = index; i < table.length; i++) {
                     if (table[i] != null) {
                         index = i;
@@ -99,10 +100,7 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (exceptedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
-                return table[index++].key;
+                return table[index++].value;
             }
         };
     }
