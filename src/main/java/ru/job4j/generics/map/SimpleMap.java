@@ -18,19 +18,18 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
 
     @Override
     public boolean put(K key, V value) {
+        boolean flag = false;
         if ((double) (count / capacity) >= LOAD_FACTOR) {
             expand();
-            return false;
-        } else {
+        }
             int index = indexFor(key.hashCode());
             MapEntry<K, V> newNode = new MapEntry<>(key, value);
             if (table[index] == null) {
                 table[index] = newNode;
                 modCount++;
-                return true;
-            }
+                flag = true;
         }
-       return false;
+       return flag;
     }
 
     private int hash(int hashCode) {
@@ -42,11 +41,12 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     }
 
     private void expand() {
-        int newSize = capacity * 2;
+        capacity *= capacity * 2;
+        int newSize = capacity;
         MapEntry<K, V>[] newMapEntry = new MapEntry[newSize];
         for (MapEntry<K, V> node : table) {
             if (node != null) {
-                newMapEntry[indexFor((Integer) node.key)] = node;
+                newMapEntry[indexFor(node.hashCode())] = node;
             }
         }
         table = newMapEntry;
@@ -54,10 +54,12 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
 
     @Override
     public V get(K key) {
-        int index = indexFor((Integer) key);
+        int index = indexFor(key.hashCode());
         if (table[index] != null) {
-            if (table[index].key.equals(key)) {
-                return (V) table[index].value;
+            if(table[index].key.hashCode() == key.hashCode()) {
+                if (table[index].key.equals(key)) {
+                    return (V) table[index].value;
+                }
             }
         }
         return null;
@@ -67,10 +69,12 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     public boolean remove(K key) {
         int index = indexFor((Integer) key);
         if (table[index] != null) {
-            if (table[index].key.equals(key)) {
-                table[index] = null;
-                modCount++;
-                return true;
+            if(table[index].key.hashCode() == key.hashCode()) {
+                if (table[index].key.equals(key)) {
+                    table[index] = null;
+                    modCount++;
+                    return true;
+                }
             }
         }
         return false;
@@ -100,7 +104,7 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[index++].value;
+                return table[index++].key;
             }
         };
     }
