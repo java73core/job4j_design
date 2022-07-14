@@ -41,12 +41,11 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     }
 
     private void expand() {
-        capacity *= capacity * 2;
-        int newSize = capacity;
-        MapEntry<K, V>[] newMapEntry = new MapEntry[newSize];
+        capacity = capacity * 2;
+        MapEntry<K, V>[] newMapEntry = new MapEntry[capacity];
         for (MapEntry<K, V> node : table) {
             if (node != null) {
-                newMapEntry[indexFor(node.hashCode())] = node;
+                newMapEntry[indexFor(node.key.hashCode())] = node;
             }
         }
         table = newMapEntry;
@@ -54,30 +53,33 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
 
     @Override
     public V get(K key) {
-        int index = indexFor(key.hashCode());
+        int index = indexFor(hash(key.hashCode()));
+        V flag = null;
         if (table[index] != null) {
             if (table[index].key.hashCode() == key.hashCode()) {
                 if (table[index].key.equals(key)) {
-                    return (V) table[index].value;
+                    flag = table[index].value;
                 }
             }
         }
-        return null;
+        return flag;
     }
 
     @Override
     public boolean remove(K key) {
-        int index = indexFor((Integer) key);
+        boolean flag = false;
+        int index = indexFor(hash(key.hashCode()));
         if (table[index] != null) {
             if (table[index].key.hashCode() == key.hashCode()) {
                 if (table[index].key.equals(key)) {
                     table[index] = null;
                     modCount++;
-                    return true;
+                    count--;
+                    flag = true;
                 }
             }
         }
-        return false;
+        return flag;
     }
 
     @Override
@@ -87,16 +89,17 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
             private int index = 0;
             @Override
             public boolean hasNext() {
+                boolean flag = false;
                 if (exceptedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
                 for (int i = index; i < table.length; i++) {
                     if (table[i] != null) {
                         index = i;
-                        return true;
+                        flag = true;
                     }
                 }
-                return false;
+                return flag;
             }
 
             @Override
