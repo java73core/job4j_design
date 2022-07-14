@@ -56,7 +56,7 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     public V get(K key) {
         int index = indexFor(key.hashCode());
         if (table[index] != null) {
-            if(table[index].key.hashCode() == key.hashCode()) {
+            if (table[index].key.hashCode() == key.hashCode()) {
                 if (table[index].key.equals(key)) {
                     return (V) table[index].value;
                 }
@@ -69,7 +69,7 @@ public class SimpleMap<K, V> implements Mapd<K, V> {
     public boolean remove(K key) {
         int index = indexFor((Integer) key);
         if (table[index] != null) {
-            if(table[index].key.hashCode() == key.hashCode()) {
+            if (table[index].key.hashCode() == key.hashCode()) {
                 if (table[index].key.equals(key)) {
                     table[index] = null;
                     modCount++;
